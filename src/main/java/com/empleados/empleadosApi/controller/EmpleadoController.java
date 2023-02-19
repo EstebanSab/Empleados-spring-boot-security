@@ -6,6 +6,7 @@ import com.empleados.empleadosApi.service.*;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController
@@ -23,7 +24,9 @@ public class EmpleadoController {
                   
 
     @GetMapping
+    @PreAuthorize("hasAuthority('empleado:read')")
     public List<Empleado> getAllUsuarios() {
+
         return this.empleadoService.getAllEmpleados();
     }
 

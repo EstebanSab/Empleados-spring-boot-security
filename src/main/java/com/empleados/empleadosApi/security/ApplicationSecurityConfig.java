@@ -3,6 +3,7 @@ package com.empleados.empleadosApi.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,6 +18,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     
@@ -32,12 +34,16 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+        .csrf().disable() // TODO: I will teach this in detail in the next section
                 .authorizeRequests()
                 .antMatchers("/")
                 .permitAll()
                 //las links que comienzen con api/ 
                 //deben ser user con role ADMIN
-                .antMatchers("/api/**").hasRole("ADMIN")
+                //.antMatchers("/api/**").hasRole("ADMIN")
+                //.antMatchers(HttpMethod.DELETE, "/api/empleados/**").hasAuthority("empleados:read")
+                //.antMatchers(HttpMethod.POST, "/api/empleados/**").hasAuthority("empleado:write")
+                //.antMatchers(HttpMethod.PUT, "/api/empleados/i/**").hasAuthority("empleado:write")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -56,6 +62,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(passwordEncoder.encode("12"))
                 //Seteamos el rol que tendra el usuario
                 .roles("ADMIN") // ROLE_ADMIN
+                .authorities("empleado:read","empleado:write")
                 .build();
 
 
@@ -63,6 +70,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .username("prohibido")
                 .password(passwordEncoder.encode("123"))
                 .roles("USER") 
+                .authorities("empleado:none")
                 .build();
 
                 return new InMemoryUserDetailsManager(
