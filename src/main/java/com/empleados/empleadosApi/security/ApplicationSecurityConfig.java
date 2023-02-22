@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 
 @Configuration
@@ -34,7 +35,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        .csrf().disable() // TODO: I will teach this in detail in the next section
+            // manejo de token xsrf token
+                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())     
+                .and()
                 .authorizeRequests()
                 .antMatchers("/")
                 .permitAll()
