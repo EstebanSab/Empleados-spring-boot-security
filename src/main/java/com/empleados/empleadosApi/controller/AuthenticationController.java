@@ -34,11 +34,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/signIn")
-    public ResponseEntity<EmpleadoDto> signIn(@AuthenticationPrincipal EmpleadoDto empleado) {
-        empleado.setToken(userAuthenticationProvider.createToken(empleado.getLogin()));
-        return ResponseEntity.ok(empleado);
+    public String signIn(@RequestBody EmpleadoDto empleado) {
+        return userAuthenticationProvider.createToken(empleado.getLogin());
+        //return ResponseEntity.ok(empleado);
     }
 
+    /* 
     @PostMapping("/signUp")
     public ResponseEntity<EmpleadoDto> signUp(@RequestBody @Valid SignUpDto empleado) {
         EmpleadoDto createdEmpleado = this.empleadoService.signUp(empleado);
@@ -50,4 +51,5 @@ public class AuthenticationController {
         SecurityContextHolder.clearContext();
         return ResponseEntity.noContent().build();
     }
+    */
 }

@@ -5,7 +5,8 @@ import java.util.Collections;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 
-
+import com.empleados.empleadosApi.dto.CredentialsDto;
+import com.empleados.empleadosApi.dto.EmpleadoDto;
 import com.empleados.empleadosApi.service.AuthenticationService;
 
 import io.jsonwebtoken.Claims;
@@ -13,7 +14,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -58,13 +59,13 @@ public class UserAuthenticationProvider {
                 .getBody()
                 .getSubject();
 
-        UserDto user = authenticationService.findByLogin(login);
+        EmpleadoDto user = authenticationService.findByLogin(login);
 
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
 
     public Authentication validateCredentials(CredentialsDto credentialsDto) {
-        UserDto user = authenticationService.authenticate(credentialsDto);
+        EmpleadoDto user = new EmpleadoDto();//authenticationService.authenticate(credentialsDto);
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
 

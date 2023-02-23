@@ -24,7 +24,7 @@ public class EmpleadoController {
                   
 
     @GetMapping
-    @PreAuthorize("hasAuthority('empleado:read')")
+    //@PreAuthorize("hasAuthority('empleado:read')")
     public List<Empleado> getAllUsuarios() {
 
         return this.empleadoService.getAllEmpleados();
