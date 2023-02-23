@@ -48,12 +48,7 @@ public class Empleado {
 	private  String trabajo;
 
   
-    
-    @OneToOne(
-            mappedBy = "empleado",
-            orphanRemoval = true
-    )
-    private Legajo legajoEmpleado;
+
 
 
 
@@ -104,12 +99,5 @@ public class Empleado {
 		this.trabajo=nuevoTrabajo;
 	}
 
-    public void setLegajoEmpleado(Legajo legajoEmpleado) {
-        this.legajoEmpleado = legajoEmpleado;
-    }
-
-    public Legajo getLegajoEmpleado() {
-        return legajoEmpleado;
-    }
 
 }
