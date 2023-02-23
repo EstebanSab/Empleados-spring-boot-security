@@ -53,6 +53,19 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic();
     }
 
+	
+//version 2.7.0 o superior
+/*
+@Bean
+protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+ http
+        .authorizeRequest()
+	.antMatchers("/").permitAll().
+	.antMatchers("/").authenticated();
+return http.build();
+}
+*/
+
 
     @Override
     @Bean
