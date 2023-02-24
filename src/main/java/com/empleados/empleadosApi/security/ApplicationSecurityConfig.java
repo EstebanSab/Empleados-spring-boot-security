@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 //import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
@@ -58,12 +59,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .httpBasic();
-                */
+                
 
                 http
                 .exceptionHandling().authenticationEntryPoint(userAuthenticationEntryPoint)
                 .and()
-                .addFilterBefore(new UsernamePasswordAuthFilter(userAuthenticationProvider), BasicAuthenticationFilter.class)
+                .addFilterBefore(new UsernamePasswordAuthFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new JwtAuthFilter(userAuthenticationProvider), UsernamePasswordAuthFilter.class)
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -71,7 +72,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/v1/signIn", "/v1/signUp").permitAll()
                 .anyRequest().authenticated();
-    }
+  */
+                http.csrf().disable()
+				.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
+				.authorizeRequests()
+				.antMatchers(HttpMethod.POST, "/v1/login").permitAll()
+				.anyRequest().authenticated(); 
+  
+            }   
     
 
 	
