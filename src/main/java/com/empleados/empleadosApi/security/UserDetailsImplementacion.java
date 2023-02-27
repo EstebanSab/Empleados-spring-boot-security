@@ -30,7 +30,7 @@ public class UserDetailsImplementacion implements UserDetails {
 
     @Override
     public String getUsername() {
-       return ""+this.empleado.getId();
+       return this.empleado.getNombre();
     }
 
     @Override

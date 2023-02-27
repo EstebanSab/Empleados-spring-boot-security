@@ -27,12 +27,14 @@ public class JWTauthenticationFilter extends UsernamePasswordAuthenticationFilte
             //Si en el request envio un objeto tipo authCredentials
             //lo mapeo al objeto creado
             authCredentials = new ObjectMapper().readValue(request.getReader(),AuthCredentials.class);
-        }catch(IOException e){}
+        }catch(IOException e){
+            System.out.println("No se pueden validad las credenciales");
+        }
         
 
         //Creo un objeto de tipo upat
         UsernamePasswordAuthenticationToken userPAT= new UsernamePasswordAuthenticationToken(
-            authCredentials.getUsuario(), null,Collections.emptyList());
+            authCredentials.getUsuario(),  authCredentials.getPassword(),Collections.emptyList());
 		
         return getAuthenticationManager().authenticate(userPAT);
 	}
@@ -51,6 +53,7 @@ public class JWTauthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.addHeader("Authorization", "Bearer"+token);
         response.getWriter().flush();
         
-        super.successfulAuthentication(request, response, null, authResult);
+        
+        super.successfulAuthentication(request, response, chain, authResult);
 	}
 }

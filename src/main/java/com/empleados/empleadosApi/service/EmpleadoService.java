@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.empleados.empleadosApi.model.Empleado;
@@ -14,6 +15,9 @@ import com.empleados.empleadosApi.repository.EmpleadoRepository;
 @Service
 public class EmpleadoService {
     private EmpleadoRepository empleadoRepository;
+
+    @Autowired
+	private PasswordEncoder passwordEncoder;
 
     @Autowired
     public EmpleadoService(
@@ -36,6 +40,8 @@ public class EmpleadoService {
     }
 
     public void crearEmpleado(Empleado empleadoParametro) {
+        empleadoParametro.setPassword(
+        passwordEncoder.encode(empleadoParametro.getPassword()));
         this.empleadoRepository.save(empleadoParametro);
     }
 

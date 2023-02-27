@@ -1,8 +1,6 @@
 package com.empleados.empleadosApi.security;
 
-import org.springframework.context.annotation.Bean;
 
-import java.beans.JavaBean;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

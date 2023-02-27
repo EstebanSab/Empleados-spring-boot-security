@@ -46,6 +46,12 @@ public class TokenUtils {
         }catch(JwtException jwte){
             return null;
         }
-        
+    }
+    public static  String getName(String token){
+        return Jwts.parser()
+        .setSigningKey(secretKey)
+        .parseClaimsJws(token)
+        .getBody()
+        .getSubject();
     }
 }

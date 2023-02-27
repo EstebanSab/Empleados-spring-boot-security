@@ -1,6 +1,8 @@
 package com.empleados.empleadosApi.security;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,11 +19,10 @@ public class UserDetailServiceImplementacion implements UserDetailsService{
     private EmpleadoRepository empleadoRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        Long idEmpleado = Long.parseLong(id);  
-        Empleado miEmpleado = this.empleadoRepository.getById(idEmpleado);
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {  
+        List<Empleado> miEmpleado = this.empleadoRepository.selectEmpleadosWhereNombre(userName);
     
-        return new UserDetailsImplementacion(miEmpleado);
+        return new UserDetailsImplementacion(miEmpleado.get(0));
     }
     
 }
