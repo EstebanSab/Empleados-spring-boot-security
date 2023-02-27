@@ -1,7 +1,5 @@
 package com.empleados.empleadosApi.model;
 import javax.persistence.*;
-import javax.print.DocFlavor.STRING;
-
 
 
 //Entity nombre del la clase

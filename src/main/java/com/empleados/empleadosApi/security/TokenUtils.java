@@ -1,6 +1,5 @@
 package com.empleados.empleadosApi.security;
 
-import java.util.Collections;
 import java.util.Date;
 
 import io.jsonwebtoken.Claims;
@@ -10,17 +9,13 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import com.empleados.empleadosApi.model.Empleado;
-import com.empleados.empleadosApi.service.EmpleadoService;
 
 @Component
 public class TokenUtils {
@@ -28,8 +23,6 @@ public class TokenUtils {
     //@Value("${security.jwt.token.secret-key:secret-key}")
     private static String secretKey="seguridadseguridadseguridadseguridad";
 
-    @Autowired
-    private EmpleadoService empleadoService;
 
     public String createToken(String nombre,Long id,String authorities) {
         Claims claims = Jwts.claims().setAudience(authorities).setSubject(nombre).setId(""+id);
