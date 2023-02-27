@@ -24,25 +24,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private final PasswordEncoder passwordEncoder;  
-    private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
-    private final UserAuthenticationProvider userAuthenticationProvider;
-    
-    @Autowired
-    public ApplicationSecurityConfig(UserAuthenticationEntryPoint userAuthenticationEntryPoint,
-                          UserAuthenticationProvider userAuthenticationProvider,
-                          PasswordEncoder passwordEncoder) {
-        this.userAuthenticationEntryPoint = userAuthenticationEntryPoint;
-        this.userAuthenticationProvider = userAuthenticationProvider;
-        this.passwordEncoder=passwordEncoder;
-    }
+public class ApplicationSecurityConfig {
 
 
+/*
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       /*http
+       http
             // manejo de token xsrf token
                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())     
                 .and()
@@ -72,7 +60,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/v1/signIn", "/v1/signUp").permitAll()
                 .anyRequest().authenticated();
-  */
+  
                 http.csrf().disable()
 				.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
@@ -81,7 +69,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
   
             }   
     
-
+*/
 	
 //version 2.7.0 o superior
 /*
@@ -93,7 +81,7 @@ protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 	.antMatchers("/").authenticated();
 return http.build();
 }
-*/
+
 
 
     @Override
@@ -124,5 +112,5 @@ return http.build();
             );
     
         }
-    
+ */   
 }

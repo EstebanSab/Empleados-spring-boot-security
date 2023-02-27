@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.empleados.empleadosApi.model.Empleado;
-import com.empleados.empleadosApi.security.UserAuthenticationProvider;
 import com.empleados.empleadosApi.service.EmpleadoService;
 import com.empleados.empleadosApi.dto.CredentialsDto;
 import com.empleados.empleadosApi.dto.EmpleadoDto;
@@ -34,15 +33,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @RequestMapping("/v1")
 public class AuthenticationController {
 
-    private  EmpleadoService empleadoService;
-    private  UserAuthenticationProvider userAuthenticationProvider;
 
-    @Autowired
-    public AuthenticationController(EmpleadoService empleadoService,
-                                    UserAuthenticationProvider userAuthenticationProvider) {
-        this.empleadoService = empleadoService;
-        this.userAuthenticationProvider = userAuthenticationProvider;
-     }
 
     @PostMapping("/login")
     public String signIn(@RequestBody CredentialsDto empleado) {
