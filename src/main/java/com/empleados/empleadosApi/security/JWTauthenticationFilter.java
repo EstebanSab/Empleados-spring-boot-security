@@ -24,7 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JWTauthenticationFilter extends UsernamePasswordAuthenticationFilter{
-    
+    private TokenUtils tokenJwtUtil = new TokenUtils();
 
     @Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
@@ -64,7 +64,7 @@ public class JWTauthenticationFilter extends UsernamePasswordAuthenticationFilte
         
         UserDetailsImplementacion userImp= (UserDetailsImplementacion)authResult.getPrincipal();
         
-        String token = TokenUtils.createToken(userImp.getNombre(),userImp.getUsername());
+        String token = tokenJwtUtil.createToken(userImp.getUsername(),userImp.getId(),userImp.getAuthoritiesString());
 		
         response.addHeader("Authorization", "Bearer"+token);
         response.getWriter().flush();

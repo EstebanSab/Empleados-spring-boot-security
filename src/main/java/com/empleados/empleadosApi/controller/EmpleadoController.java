@@ -35,7 +35,7 @@ public class EmpleadoController {
 
     @GetMapping
     //@PreAuthorize("hasAuthority('ADMIN')")
-    //@PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('ROLE_EMPLEADO')")
     public List<Empleado> getAllUsuarios() { 
         AuxHasRole.hasRole("ROLE_ADMIN");
 

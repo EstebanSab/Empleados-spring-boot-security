@@ -23,12 +23,10 @@ public class EmpleadosApiApplication {
 	return args -> {
 
 
-		empleadoService.crearEmpleado(new Empleado("Juan","Ramirez","Ingeniero","123"));
-		empleadoService.crearEmpleado(new Empleado("Juan1","Ramirez1","Ingeniero","123"));
-		empleadoService.crearEmpleado(new Empleado("Juan2","Ramirez2","Ingeniero","123"));
-		empleadoService.crearEmpleado(new Empleado("Juan3","Ramirez3","Ingeniero","123"));
-		empleadoService.crearEmpleado(new Empleado("Juan4","Ramirez4","Ingeniero","123"));
-		empleadoService.crearEmpleado(new Empleado("Juan5","Ramirez5","Ingeniero","123"));
+		empleadoService.crearEmpleado(new Empleado("Juan","Ramirez","Ingeniero","123","ROLE_ADMIN,ROLE_EMPLEADO"));
+		empleadoService.crearEmpleado(new Empleado("Juan1","Ramirez1","Ingeniero","1234","ROLE_EMPLEADO"));
+		
+	
 		};
 	
 	}

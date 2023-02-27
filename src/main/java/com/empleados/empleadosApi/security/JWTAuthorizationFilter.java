@@ -15,6 +15,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
+    private TokenUtils tokenJwtUtil = new TokenUtils();
+
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
@@ -26,7 +28,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             String token = bearerToken.replace("Bearer ", "");
 
-            UsernamePasswordAuthenticationToken userPAT = TokenUtils.validateToken(token);
+            UsernamePasswordAuthenticationToken userPAT = tokenJwtUtil.validateToken(token);
            SecurityContextHolder.getContext().setAuthentication(userPAT);
             }
         

@@ -1,5 +1,6 @@
 package com.empleados.empleadosApi.model;
 import javax.persistence.*;
+import javax.print.DocFlavor.STRING;
 
 
 
@@ -52,6 +53,12 @@ public class Empleado {
             columnDefinition = "TEXT")
 	private  String password;
 
+
+	@Column(name="authorities",
+            nullable = true,
+            columnDefinition = "TEXT")
+	private  String authorities;
+
   
 
 
@@ -69,8 +76,29 @@ public class Empleado {
 		this.password=password;
 	}
 
-	public Empleado() {}
+	public Empleado(
+        String nombre,
+        String apellido,
+        String trabajo,
+		String password,
+		String authorities
+        ) {
+		this.nombre = nombre;
+        this.apellido = apellido;
+        this.trabajo = trabajo;
+		this.password=password;
+		this.authorities=authorities;
+	}
 
+
+	public Empleado() {}
+public String getAuthorities() {
+	return authorities;
+}
+
+public void setAuthorities(String authorities) {
+	this.authorities = this.authorities+","+authorities;
+}
 public String getPassword() {
 	return password;
 }

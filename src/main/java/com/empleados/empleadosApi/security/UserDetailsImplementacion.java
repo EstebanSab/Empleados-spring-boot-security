@@ -29,6 +29,16 @@ public class UserDetailsImplementacion implements UserDetails {
        return Collections.emptyList();
     }
 
+    public String getAuthoritiesString() {
+        //List<GrantedAuthority> roles = new ArrayList<>();
+        //roles.add(new SimpleGrantedAuthority("ADMIN"));
+        //return roles;
+       return empleado.getAuthorities();
+    }
+
+
+  
+
     @Override
     public String getPassword() {
         return empleado.getPassword();
@@ -59,8 +69,8 @@ public class UserDetailsImplementacion implements UserDetails {
         return true;
     }
 
-    public String getNombre(){
-        return this.empleado.getNombre();
+    public Long getId(){
+        return this.empleado.getId();
     }
     
 }
