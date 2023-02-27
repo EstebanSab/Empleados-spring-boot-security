@@ -1,5 +1,8 @@
 package com.empleados.empleadosApi.security;
 
+import org.springframework.context.annotation.Bean;
+
+import java.beans.JavaBean;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -11,9 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
-    
+public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(

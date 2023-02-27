@@ -44,7 +44,7 @@ String token = getJWTToken(empleado.getLogin());
 //User user = new User();
 //user.setUser(username);
 //user.setToken(token);		
-return token;
+return "hola como estas¨?";
 }
 
 private String getJWTToken(String username) {

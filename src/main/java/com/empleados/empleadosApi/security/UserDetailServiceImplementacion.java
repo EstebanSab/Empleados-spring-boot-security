@@ -18,7 +18,6 @@ public class UserDetailServiceImplementacion implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        // TODO Auto-generated method stub
         Long idEmpleado = Long.parseLong(id);  
         Empleado miEmpleado = this.empleadoRepository.getById(idEmpleado);
     

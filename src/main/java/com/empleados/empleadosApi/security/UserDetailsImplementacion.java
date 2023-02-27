@@ -25,8 +25,7 @@ public class UserDetailsImplementacion implements UserDetails {
 
     @Override
     public String getPassword() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+        return empleado.getPassword();
     }
 
     @Override
@@ -36,14 +35,12 @@ public class UserDetailsImplementacion implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isAccountNonExpired'");
+       return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isAccountNonLocked'");
+        return true;
     }
 
     @Override

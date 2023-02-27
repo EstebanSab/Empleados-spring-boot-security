@@ -21,24 +21,28 @@ public class JWTauthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
-		//mi clase
+		//Creo un objeto de tipo AuthCredentials
         AuthCredentials authCredentials = new AuthCredentials();
         try{
+            //Si en el request envio un objeto tipo authCredentials
+            //lo mapeo al objeto creado
             authCredentials = new ObjectMapper().readValue(request.getReader(),AuthCredentials.class);
-        }catch(IOException e){
-
-        }
-
+        }catch(IOException e){}
         
+
+        //Creo un objeto de tipo upat
         UsernamePasswordAuthenticationToken userPAT= new UsernamePasswordAuthenticationToken(
-            authCredentials.getUsuario(), authCredentials.getPassword(),Collections.emptyList());
+            authCredentials.getUsuario(), null,Collections.emptyList());
 		
         return getAuthenticationManager().authenticate(userPAT);
 	}
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-			Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(
+        HttpServletRequest request, 
+        HttpServletResponse response, 
+        FilterChain chain,
+		Authentication authResult) throws IOException, ServletException {
         
         UserDetailsImplementacion userImp= (UserDetailsImplementacion)authResult.getPrincipal();
         

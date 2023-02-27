@@ -47,6 +47,11 @@ public class Empleado {
             columnDefinition = "TEXT")
 	private  String trabajo;
 
+	@Column(name="password",
+            nullable = false,
+            columnDefinition = "TEXT")
+	private  String password;
+
   
 
 
@@ -55,16 +60,24 @@ public class Empleado {
 	public Empleado(
         String nombre,
         String apellido,
-        String trabajo
+        String trabajo,
+		String password
         ) {
 		this.nombre = nombre;
         this.apellido = apellido;
         this.trabajo = trabajo;
+		this.password=password;
 	}
 
 	public Empleado() {}
 
+public String getPassword() {
+	return password;
+}
 
+public void setPassword(String password) {
+	this.password = password;
+}
 
 	public Long getId() {
 		return this.id;

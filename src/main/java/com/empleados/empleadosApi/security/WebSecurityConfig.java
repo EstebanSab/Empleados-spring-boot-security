@@ -1,12 +1,15 @@
 package com.empleados.empleadosApi.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -14,11 +17,19 @@ import lombok.AllArgsConstructor;
 
 
 @Configuration
-@AllArgsConstructor
 public class WebSecurityConfig {
     
-    private final UserDetailsService userDetailsService;
-    private final JwtAuthorizationFilter jwtAuthorizationFilter;
+
+    private final UserDetailsService miUserDetailsService;
+    private PasswordEncoder passwordeEncoder;
+   
+    @Autowired
+    public WebSecurityConfig( 
+        UserDetailsService miUserDetailsService,
+        PasswordEncoder passwordeEncoder){
+            this.miUserDetailsService=miUserDetailsService;
+            this.passwordeEncoder=passwordeEncoder;
+    }
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http,AuthenticationManager authManager){
@@ -39,13 +50,25 @@ public class WebSecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         .and()
                         .addFilter(jwtAuthenticationFilter)
-                        .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+                        .addFilterBefore(new JwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                         .build();
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }
     }
+
+    @Bean 
+    AuthenticationManager authManager(HttpSecurity http)throws Exception{
+        return http
+            .getSharedObject(AuthenticationManagerBuilder.class)
+            .userDetailsService(miUserDetailsService)
+            .passwordEncoder(passwordeEncoder)
+            .and()
+            .build();
+
+    }
+
+   
 }
