@@ -1,6 +1,7 @@
 package com.empleados.empleadosApi.controller;
 
 import com.empleados.empleadosApi.model.Empleado;
+import com.empleados.empleadosApi.security.AuxHasRole;
 import com.empleados.empleadosApi.service.*;
 
 import java.util.List;
@@ -23,9 +24,20 @@ public class EmpleadoController {
     }
                   
 
+    @GetMapping("/admin")
+    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public List<Empleado> getAllUsuariosAdmin() {
+
+        return this.empleadoService.getAllEmpleados();
+    }
+
     @GetMapping
-    //@PreAuthorize("hasAuthority('empleado:read')")
-    public List<Empleado> getAllUsuarios() {
+    //@PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasRole('USER')")
+    public List<Empleado> getAllUsuarios() { 
+        AuxHasRole.hasRole("ROLE_ADMIN");
 
         return this.empleadoService.getAllEmpleados();
     }

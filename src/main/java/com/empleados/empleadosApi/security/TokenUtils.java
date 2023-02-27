@@ -9,7 +9,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -42,7 +49,11 @@ public class TokenUtils {
                 .getBody()
                 .getId();
 
-        return new UsernamePasswordAuthenticationToken(id, null, Collections.emptyList());
+
+                List<GrantedAuthority> roles = new ArrayList<>();
+                roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+
+        return new UsernamePasswordAuthenticationToken(id, null, /*Collections.emptyList()*/roles);
         }catch(JwtException jwte){
             return null;
         }
