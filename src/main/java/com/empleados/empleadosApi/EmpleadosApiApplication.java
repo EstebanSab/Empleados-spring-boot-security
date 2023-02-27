@@ -24,11 +24,11 @@ public class EmpleadosApiApplication {
 
 
 		empleadoService.crearEmpleado(new Empleado("Juan","Ramirez","Ingeniero","123"));
-		empleadoService.crearEmpleado(new Empleado("Juan1","Ramirez1","Ingeniero","123"));
-		empleadoService.crearEmpleado(new Empleado("Juan2","Ramirez2","Ingeniero","123"));
-		empleadoService.crearEmpleado(new Empleado("Juan3","Ramirez3","Ingeniero","123"));
-		empleadoService.crearEmpleado(new Empleado("Juan4","Ramirez4","Ingeniero","123"));
-		empleadoService.crearEmpleado(new Empleado("Juan5","Ramirez5","Ingeniero","123"));
+		empleadoService.crearEmpleado(new Empleado("Juan1","Ramirez1","Ingeniero","1231"));
+		empleadoService.crearEmpleado(new Empleado("Juan2","Ramirez2","Ingeniero","1232"));
+		empleadoService.crearEmpleado(new Empleado("Juan3","Ramirez3","Ingeniero","1233"));
+		empleadoService.crearEmpleado(new Empleado("Juan4","Ramirez4","Ingeniero","1234"));
+		empleadoService.crearEmpleado(new Empleado("Juan5","Ramirez5","Ingeniero","1235"));
 		};
 	
 	}
