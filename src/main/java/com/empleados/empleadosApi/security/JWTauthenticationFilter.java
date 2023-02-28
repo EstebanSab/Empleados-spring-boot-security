@@ -62,6 +62,6 @@ public class JWTauthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.getWriter().flush();
         
         
-        super.successfulAuthentication(request, response, chain, authResult);
+        //super.successfulAuthentication(request, response, chain, authResult);
 	}
 }

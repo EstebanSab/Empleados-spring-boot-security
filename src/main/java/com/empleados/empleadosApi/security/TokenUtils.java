@@ -25,13 +25,15 @@ public class TokenUtils {
 
 
     public String createToken(String nombre,Long id,String authorities) {
-        Claims claims = Jwts.claims().setAudience(authorities).setSubject(nombre).setId(""+id);
+        //Claims claims = Jwts.claims().setAudience(authorities).setSubject(nombre).setId();
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + 3600000); // 1 hour
 
         return Jwts.builder()
-                .setClaims(claims)
+                .setSubject(nombre)
+                .setId(""+id)
+                .claim("authorities", authorities)
                 .setIssuedAt(now)
                 .setExpiration(validity)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
@@ -46,11 +48,11 @@ public class TokenUtils {
                 .getBody()
                 .getSubject();
 
-                String authorities = Jwts.parser()
+                String authorities = (String) Jwts.parser()
                 .setSigningKey(secretKey)
                 .parseClaimsJws(token)
                 .getBody()
-                .getAudience();
+                .get("authorities");
 
 
         return new UsernamePasswordAuthenticationToken(nombre, null, /*Collections.emptyList()*/setAuthorities(authorities));
