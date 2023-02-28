@@ -3,6 +3,7 @@ package com.empleados.empleadosApi.controller;
 
 
 
+import com.empleados.empleadosApi.dto.EmpleadoDto;
 import com.empleados.empleadosApi.model.Empleado;
 import com.empleados.empleadosApi.service.EmpleadoService;
 
@@ -31,13 +32,13 @@ public class AuthenticationController {
 
 
     @PostMapping("/login")
-    public List<Empleado> signIn(HttpServletResponse response) {
+    public EmpleadoDto signIn(HttpServletResponse response) {
         String nombre = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	        return empleadoService.getEmpleadoByName(nombre);
     }
 
     @GetMapping("/empleado")
-    public List<Empleado> empl(HttpServletRequest request) {
+    public EmpleadoDto empl(HttpServletRequest request) {
         String nombre = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return empleadoService.getEmpleadoByName(nombre);
     }    

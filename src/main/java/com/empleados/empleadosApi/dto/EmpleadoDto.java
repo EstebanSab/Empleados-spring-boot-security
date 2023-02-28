@@ -2,61 +2,67 @@ package com.empleados.empleadosApi.dto;
 
 public class EmpleadoDto {
         private Long id;
-        private String firstName;
-        private String lastName;
-        private String login;
-        private String token;
+        private String nombre;
+        private String apellido;
+        private String trabajo;
+        private String authorities;
     
         public EmpleadoDto() {
             super();
         }
     
-        public EmpleadoDto(Long id, String firstName, String lastName, String login, String token) {
+        public EmpleadoDto(
+            Long id, 
+            String nombre, 
+            String apellido, 
+            String trabajo, 
+            String authorities) {
             this.id = id;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.login = login;
-            this.token = token;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.trabajo = trabajo;
+            this.authorities = authorities;
         }
     
         public Long getId() {
-            return id;
+            return this.id;
         }
     
         public void setId(Long id) {
             this.id = id;
         }
-    
-        public String getFirstName() {
-            return firstName;
+
+        public String getNombre() {
+            return this.nombre;
         }
-    
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
         }
-    
-        public String getLastName() {
-            return lastName;
+
+        public String getApellido() {
+            return this.apellido;
         }
-    
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
+
+        public void setApellido(String apellido) {
+            this.apellido = apellido;
         }
-    
-        public String getLogin() {
-            return login;
+
+        public String getTrabajo() {
+            return this.trabajo;
         }
-    
-        public void setLogin(String login) {
-            this.login = login;
+
+        public void setTrabajo(String trabajo) {
+            this.trabajo = trabajo;
         }
-    
-        public String getToken() {
-            return token;
+
+        public String getAuthorities() {
+            return this.authorities;
         }
-    
-        public void setToken(String token) {
-            this.token = token;
+        
+        public void setAuthorities(String authorities) {
+            this.authorities = authorities;
         }
+
     }  
 

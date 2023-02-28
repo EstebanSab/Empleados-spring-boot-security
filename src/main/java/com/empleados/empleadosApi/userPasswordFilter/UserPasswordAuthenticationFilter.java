@@ -1,5 +1,6 @@
 package com.empleados.empleadosApi.userPasswordFilter;
 
+import com.empleados.empleadosApi.dto.AuthCredentialsDto;
 import com.empleados.empleadosApi.jwtFilter.*;
 
 import java.io.IOException;
@@ -24,11 +25,11 @@ public class UserPasswordAuthenticationFilter extends UsernamePasswordAuthentica
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
 		//Creo un objeto de tipo AuthCredentials
-        AuthCredentials authCredentials = new AuthCredentials();
+        AuthCredentialsDto authCredentials = new AuthCredentialsDto();
         try{
             //Si en el request envio un objeto tipo authCredentials
             //lo mapeo al objeto creado
-            authCredentials = new ObjectMapper().readValue(request.getReader(),AuthCredentials.class);
+            authCredentials = new ObjectMapper().readValue(request.getReader(),AuthCredentialsDto.class);
         }catch(IOException e){
             System.out.println("No se pueden validad las credenciales");
         }

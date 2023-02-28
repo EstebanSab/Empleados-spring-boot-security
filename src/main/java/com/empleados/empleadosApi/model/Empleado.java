@@ -31,7 +31,7 @@ public class Empleado {
             unique=true
     )
 	private Long id;
-
+ 
 	@Column(name="nombre",
             nullable = false,
             columnDefinition = "TEXT")
@@ -63,7 +63,7 @@ public class Empleado {
 
 
 
-	public Empleado(
+	/*public Empleado(
         String nombre,
         String apellido,
         String trabajo,
@@ -73,7 +73,7 @@ public class Empleado {
         this.apellido = apellido;
         this.trabajo = trabajo;
 		this.password=password;
-	}
+	}*/
 
 	public Empleado(
         String nombre,
@@ -89,6 +89,17 @@ public class Empleado {
 		this.authorities=authorities;
 	}
 
+	public Empleado(
+        String nombre,
+        String apellido,
+        String trabajo,
+		String authorities
+        ) {
+		this.nombre = nombre;
+        this.apellido = apellido;
+        this.trabajo = trabajo;
+		this.authorities=authorities;
+	}
 
 	public Empleado() {}
 public String getAuthorities() {

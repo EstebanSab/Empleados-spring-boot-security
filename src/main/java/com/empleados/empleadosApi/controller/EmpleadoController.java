@@ -1,6 +1,7 @@
 package com.empleados.empleadosApi.controller;
 
 import com.empleados.empleadosApi.model.Empleado;
+import com.empleados.empleadosApi.dto.EmpleadoDto;
 import com.empleados.empleadosApi.jwtFilter.AuxHasRole;
 import com.empleados.empleadosApi.service.*;
 
@@ -28,7 +29,7 @@ public class EmpleadoController {
     //@PreAuthorize("hasRole('ADMIN')")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public List<Empleado> getAllUsuariosAdmin() {
+    public List<EmpleadoDto> getAllUsuariosAdmin() {
 
         return this.empleadoService.getAllEmpleados();
     }
@@ -36,14 +37,14 @@ public class EmpleadoController {
     @GetMapping
     //@PreAuthorize("hasAuthority('ADMIN')")
     @PreAuthorize("hasRole('ROLE_EMPLEADO')")
-    public List<Empleado> getAllUsuarios() { 
+    public List<EmpleadoDto> getAllUsuarios() { 
         AuxHasRole.hasRole("ROLE_ADMIN");
 
         return this.empleadoService.getAllEmpleados();
     }
 
     @GetMapping("/empleado/{id}")
-     public Empleado getOneUsuario(@PathVariable Long id) {
+     public EmpleadoDto getOneUsuario(@PathVariable Long id) {
         return this.empleadoService.getEmpleadoById(id);
     }
 

@@ -1,15 +1,17 @@
-package com.empleados.empleadosApi.userPasswordFilter;
+package com.empleados.empleadosApi.dto;
 
-public class AuthCredentials {
+
+
+public class AuthCredentialsDto {
  
     private String usuario;
     private String password;
 
-    public AuthCredentials() {
+    public AuthCredentialsDto() {
         super();
     }
 
-    public AuthCredentials(String usuario, String password) {
+    public AuthCredentialsDto(String usuario, String password) {
         this.usuario = usuario;
         this.password = password;
     }

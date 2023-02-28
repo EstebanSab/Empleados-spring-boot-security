@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.empleados.empleadosApi.dto.EmpleadoDto;
+import com.empleados.empleadosApi.mapper.EmpleadoMapper;
 import com.empleados.empleadosApi.model.Empleado;
 
 import com.empleados.empleadosApi.repository.EmpleadoRepository;
@@ -15,6 +17,7 @@ import com.empleados.empleadosApi.repository.EmpleadoRepository;
 @Service
 public class EmpleadoService {
     private EmpleadoRepository empleadoRepository;
+    private EmpleadoMapper empleadoMapper = new EmpleadoMapper();
 
     @Autowired
 	private PasswordEncoder passwordEncoder;
@@ -26,17 +29,21 @@ public class EmpleadoService {
         this.empleadoRepository=empleadoRepository;
     }
 
-    public List<Empleado> getAllEmpleados() {
-        return this.empleadoRepository.findAll();
+    public List<EmpleadoDto> getAllEmpleados() {
+        return  this.empleadoMapper
+            .manyEmpleadoToEmpleadoDto(
+                this.empleadoRepository.findAll()
+            );
     }
 
-    public Empleado getEmpleadoById(Long id) {
+    public EmpleadoDto getEmpleadoById(Long id) {
         Optional<Empleado> miEmpleado = this.empleadoRepository.findById(id);
-        return miEmpleado.orElse(new Empleado());
+        return this.empleadoMapper.empleadoToEmpleadoDto(miEmpleado.get());
+        //return miEmpleado.orElse(new Empleado());
     }
 
-    public List<Empleado> getEmpleadoByName(String nombre){
-        return this.empleadoRepository.selectEmpleadosWhereNombre(nombre);
+    public EmpleadoDto getEmpleadoByName(String nombre){
+        return this.empleadoMapper.empleadoToEmpleadoDto((Empleado)this.empleadoRepository.selectEmpleadosWhereNombre(nombre).get(0));
     }
 
     public void crearEmpleado(Empleado empleadoParametro) {

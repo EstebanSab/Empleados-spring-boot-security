@@ -21,6 +21,7 @@ public class UserDetailServiceImplementacion implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {  
         List<Empleado> miEmpleado = this.empleadoRepository.selectEmpleadosWhereNombre(userName);
+        //Empleado miEmpleado = (Empleado) this.empleadoRepository.selectOneEmpleadoWhereNombre(userName);
     
         return new UserDetailsImplementacion(miEmpleado.get(0));
     }
