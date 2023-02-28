@@ -4,7 +4,6 @@ package com.empleados.empleadosApi.controller;
 
 
 import com.empleados.empleadosApi.model.Empleado;
-import com.empleados.empleadosApi.security.TokenUtils;
 import com.empleados.empleadosApi.service.EmpleadoService;
 
 
@@ -33,18 +32,14 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public List<Empleado> signIn(HttpServletResponse response) {
-        String bearer = response.getHeader("Authorization");
-        String nombre = TokenUtils.getName(bearer.replace("Bearer ", ""));
-        System.out.println(empleadoService.getEmpleadoByName(nombre));
+        String nombre = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	        return empleadoService.getEmpleadoByName(nombre);
     }
 
     @GetMapping("/empleado")
     public List<Empleado> empl(HttpServletRequest request) {
-    String bearer = request.getHeader("Authorization");
-        String nombre = TokenUtils.getName(bearer.replace("Bearer ", ""));
-        System.out.println(empleadoService.getEmpleadoByName(nombre));
-	        return empleadoService.getEmpleadoByName(nombre);
+        String nombre = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return empleadoService.getEmpleadoByName(nombre);
     }    
 
 

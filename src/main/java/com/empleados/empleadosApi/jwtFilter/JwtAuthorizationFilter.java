@@ -1,4 +1,4 @@
-package com.empleados.empleadosApi.security;
+package com.empleados.empleadosApi.jwtFilter;
 
 
 import java.io.IOException;

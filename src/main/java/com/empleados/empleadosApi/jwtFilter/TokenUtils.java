@@ -1,26 +1,20 @@
-package com.empleados.empleadosApi.security;
+package com.empleados.empleadosApi.jwtFilter;
 
-import java.util.Collections;
 import java.util.Date;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import com.empleados.empleadosApi.model.Empleado;
-import com.empleados.empleadosApi.service.EmpleadoService;
 
 @Component
 public class TokenUtils {
@@ -28,17 +22,18 @@ public class TokenUtils {
     //@Value("${security.jwt.token.secret-key:secret-key}")
     private static String secretKey="seguridadseguridadseguridadseguridad";
 
-    @Autowired
-    private EmpleadoService empleadoService;
+    
 
     public String createToken(String nombre,Long id,String authorities) {
-        Claims claims = Jwts.claims().setAudience(authorities).setSubject(nombre).setId(""+id);
+        //Claims claims = Jwts.claims().setAudience(authorities).setSubject(nombre).setId(""+id);
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + 3600000); // 1 hour
 
         return Jwts.builder()
-                .setClaims(claims)
+                .setSubject(nombre)
+                .setId(""+id)
+                .claim("authorities", authorities)
                 .setIssuedAt(now)
                 .setExpiration(validity)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
@@ -53,15 +48,14 @@ public class TokenUtils {
                 .getBody()
                 .getSubject();
 
-                String authorities = Jwts.parser()
+                String authorities = (String) Jwts.parser()
                 .setSigningKey(secretKey)
                 .parseClaimsJws(token)
                 .getBody()
-                .getAudience();
+                .get("authorities");
 
 
         return new UsernamePasswordAuthenticationToken(nombre, null, /*Collections.emptyList()*/setAuthorities(authorities));
-        
         }catch(JwtException jwte){
             return null;
         }

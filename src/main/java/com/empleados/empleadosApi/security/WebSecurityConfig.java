@@ -14,6 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.empleados.empleadosApi.jwtFilter.JwtAuthorizationFilter;
+import com.empleados.empleadosApi.userPasswordFilter.UserPasswordAuthenticationFilter;
+
 
 
 @Configuration
@@ -35,9 +38,9 @@ public class WebSecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http,AuthenticationManager authManager){
-       JWTauthenticationFilter jwtAuthenticationFilter = new JWTauthenticationFilter();
-       jwtAuthenticationFilter.setAuthenticationManager(authManager);
-       jwtAuthenticationFilter.setFilterProcessesUrl(
+       UserPasswordAuthenticationFilter userPasswordAuthenticationFilter = new UserPasswordAuthenticationFilter();
+       userPasswordAuthenticationFilter.setAuthenticationManager(authManager);
+       userPasswordAuthenticationFilter.setFilterProcessesUrl(
         "/v1/login");
         
         try {
@@ -51,7 +54,7 @@ public class WebSecurityConfig {
                         .sessionManagement()
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         .and()
-                        .addFilter(jwtAuthenticationFilter)
+                        .addFilter(userPasswordAuthenticationFilter)
                         .addFilterBefore(new JwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                         .build();
 

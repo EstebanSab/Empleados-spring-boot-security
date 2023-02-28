@@ -1,7 +1,7 @@
 package com.empleados.empleadosApi.controller;
 
 import com.empleados.empleadosApi.model.Empleado;
-import com.empleados.empleadosApi.security.AuxHasRole;
+import com.empleados.empleadosApi.jwtFilter.AuxHasRole;
 import com.empleados.empleadosApi.service.*;
 
 import java.util.List;

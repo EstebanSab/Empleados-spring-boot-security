@@ -1,6 +1,5 @@
 package com.empleados.empleadosApi.model;
 import javax.persistence.*;
-import javax.print.DocFlavor.STRING;
 
 
 

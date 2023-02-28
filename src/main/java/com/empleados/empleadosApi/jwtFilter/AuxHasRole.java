@@ -1,4 +1,4 @@
-package com.empleados.empleadosApi.security;
+package com.empleados.empleadosApi.jwtFilter;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package com.empleados.empleadosApi.security;
+package com.empleados.empleadosApi.userPasswordFilter;
 
 public class AuthCredentials {
  
